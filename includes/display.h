@@ -9,7 +9,6 @@
 
 typedef struct		s_display
 {
-
 	void			*mlx_ptr;
 	t_window		*mlx_win;
 	t_image			*mlx_img;

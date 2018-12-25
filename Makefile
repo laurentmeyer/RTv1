@@ -13,6 +13,8 @@ SRCFILES =					\
 			hooks.c			\
 			main.c			\
 			math.c			\
+			object.c		\
+			scene.c			\
 			render.c		
 
 LIBS =		ft						\
