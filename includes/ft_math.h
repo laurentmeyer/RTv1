@@ -2,5 +2,6 @@
 # define FT_MATH_H
 
 double	lerp_double(double a, double b, double p);
+double	radians(double degrees);
 
 #endif

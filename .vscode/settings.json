@@ -4,6 +4,11 @@
 		"display.h": "c",
 		"ft_mlx.h": "c",
 		"libft.h": "c",
-		"render.h": "c"
+		"render.h": "c",
+		"object.h": "c",
+		"scene.h": "c",
+		"math.h": "c",
+		"stdlib.h": "c",
+		"ft_math.h": "c"
 	}
 }

@@ -8,7 +8,7 @@
 
 typedef struct		s_scene
 {
-	t_camera		*camera;
+	t_camera		camera;
 	t_object		*objects[MAX_OBJECTS];
 	size_t			objects_count;
 	t_light			*lights[MAX_LIGHTS];

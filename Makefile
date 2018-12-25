@@ -5,16 +5,20 @@ BUILDDIR =	builds
 SOURCEDIR =	srcs
 HEADERDIR = includes
 
-SRCFILES =					\
-			display.c		\
-			exit.c			\
-			init_display.c	\
-			init_ram.c		\
-			hooks.c			\
-			main.c			\
-			math.c			\
-			object.c		\
-			scene.c			\
+SRCFILES =						\
+			display.c			\
+			exit.c				\
+			init_display.c		\
+			init_scene.c		\
+			init_ram.c			\
+			hooks.c				\
+			main.c				\
+			math.c				\
+			object.c			\
+			collisions.c		\
+			transformations.c	\
+			shape_sphere.c		\
+			geometry.c			\
 			render.c		
 
 LIBS =		ft						\

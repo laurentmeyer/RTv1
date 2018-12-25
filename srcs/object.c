@@ -10,6 +10,7 @@ t_object	*new_object(int type)
 	{
 		ft_bzero(obj, sizeof(t_object));
 		obj->type = type;
+		obj->scale = (t_v4){1., 1., 1., 1.};
 	}
 	return (obj);
 }

@@ -8,7 +8,9 @@ void		populate_scene(t_scene *scene)
 
 	object = new_object(SPHERE);
 	object->color = 0xff0000;
-	scene->objects[scene->objects_count++] = object;
+	object->position.y = 1.;
+	object->position.z = 5.;
+	scene->objects[(scene->objects_count++)] = object;
 }
 
 int			main(void)

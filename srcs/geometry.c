@@ -1,6 +1,11 @@
 #include "geometry.h"
 #include <math.h>
 
+t_v4	inverse(t_v4 v)
+{
+	return ((t_v4){- v.x, - v.y, - v.z, v.w});
+}
+
 double	magnitude_v4(t_v4 v)
 {
 	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
