@@ -20,6 +20,7 @@ SRCFILES =						\
 			shape_sphere.c		\
 			shape_plane.c		\
 			geometry.c			\
+			shading.c			\
 			render.c		
 
 LIBS =		ft						\

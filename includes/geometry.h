@@ -7,22 +7,22 @@ typedef struct		s_v2i
 	int				y;
 }					t_v2i;
 
-typedef struct		s_v4
+typedef struct		s_v3
 {
 	double			x;
 	double			y;
 	double			z;
-	double			w;
-}					t_v4;
+}					t_v3;
 
-t_v4				inverse(t_v4 v);
-double				magnitude_v4(t_v4 vector);
-double				dot_product_v4(t_v4 a, t_v4 b);
-t_v4				cross_product_v4(t_v4 a, t_v4 b);
-t_v4				translate(t_v4 p, t_v4 t);
-t_v4				scale(t_v4 p, t_v4 t);
-t_v4				rotate_x(t_v4 p, double radians);
-t_v4				rotate_y(t_v4 p, double radians);
-t_v4				rotate_z(t_v4 p, double radians);
+t_v3				inverse(t_v3 v);
+double				magnitude(t_v3 vector);
+t_v3				normalize(t_v3 v);
+double				dot_product(t_v3 a, t_v3 b);
+t_v3				cross_product(t_v3 a, t_v3 b);
+t_v3				translate(t_v3 p, t_v3 t);
+t_v3				scale(t_v3 p, t_v3 t);
+t_v3				rotate_x(t_v3 p, double radians);
+t_v3				rotate_y(t_v3 p, double radians);
+t_v3				rotate_z(t_v3 p, double radians);
 
 #endif

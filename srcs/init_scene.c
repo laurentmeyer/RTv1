@@ -10,12 +10,9 @@ static void		update_camera(t_camera *cam)
 	cam->up_left.x = cam->eye_distance * tan(-cam->h_fov / 2);
 	cam->up_left.y = - cam->up_left.x * WIN_H / WIN_W;
 	cam->up_left.z = cam->eye_distance;
-	cam->up_left.w = 1.;
-	// printf("upleft x=%f y=%f z=%f\n", cam->up_left.x, cam->up_left.y, cam->up_left.z);
 	cam->down_right.x = - cam->up_left.x;
 	cam->down_right.y = - cam->up_left.y;
 	cam->down_right.z = - cam->up_left.z;
-	cam->down_right.w = 1.;
 }
 
 void			init_scene(t_ram *ram)
@@ -37,6 +34,6 @@ void 			free_scene(t_scene *scene)
 		destroy_object(scene->objects[i++]);
 	i = 0;
 	while (i < scene->lights_count)
-		destroy_object(scene->lights[i++]);
+		destroy_light(scene->lights[i++]);
 	free(scene);
 }

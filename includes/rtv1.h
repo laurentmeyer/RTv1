@@ -26,10 +26,9 @@ void				init_display(t_ram *ram);
 void				free_display(t_display *display);
 void				init_scene(t_ram *ram);
 void 				free_scene(t_scene *scene);
-t_object			*new_object(int type);
-void				destroy_object(t_object *obj);
 int					init_hooks(t_ram *ram);
 void				pixel_put(t_image *img, int x, int y, unsigned int color);
+unsigned int		lerp_color(unsigned int color, double ratio);
 int					render_scene(t_ram *ram);
 void				exit_message(t_ram *ram, int exit_code, char *message);
 

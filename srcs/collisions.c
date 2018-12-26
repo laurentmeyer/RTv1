@@ -5,12 +5,12 @@
 
 void	offset_ray(t_ray *ray, t_object *ob)
 {
-	t_v4	inverse_scale;
+	t_v3	inverse_scale;
 
-	inverse_scale = (t_v4){1 / ob->scale.x,
-			1 / ob->scale.y, 1 / ob->scale.z, ob->scale.w};
-	ray->origin = translate(ray->origin, (t_v4){- ob->position.x,
-			- ob->position.y, - ob->position.z, ob->position.w});
+	inverse_scale = (t_v3){1 / ob->scale.x,
+			1 / ob->scale.y, 1 / ob->scale.z};
+	ray->origin = translate(ray->origin, (t_v3){- ob->position.x,
+			- ob->position.y, - ob->position.z });
 	ray->origin = rotate_z(ray->origin, -(ob->rotation.z));
 	ray->origin = rotate_y(ray->origin, -(ob->rotation.y));
 	ray->origin = rotate_x(ray->origin, -(ob->rotation.x));
@@ -21,11 +21,12 @@ void	offset_ray(t_ray *ray, t_object *ob)
 	ray->direction = scale(ray->direction, inverse_scale);
 }
 
-void	get_collision(t_hit *out, t_ray ray, t_object *object)
+double		get_collision(t_hit *out, t_ray ray, t_object *object)
 {
 	offset_ray(&ray, object);
 	if (object->type == SPHERE)
-		hit_sphere(out, &ray, object);
-	else if (object->type == PLANE)
-		hit_plane(out, &ray, object);
+		return (hit_sphere(out, &ray, object));
+	if (object->type == PLANE)
+		return (hit_plane(out, &ray, object));
+	return (-1.);
 }

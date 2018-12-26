@@ -9,6 +9,7 @@
 		"scene.h": "c",
 		"math.h": "c",
 		"stdlib.h": "c",
-		"ft_math.h": "c"
+		"ft_math.h": "c",
+		"geometry.h": "c"
 	}
 }
