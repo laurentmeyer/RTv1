@@ -18,6 +18,7 @@ SRCFILES =						\
 			collisions.c		\
 			transformations.c	\
 			shape_sphere.c		\
+			shape_plane.c		\
 			geometry.c			\
 			render.c		
 

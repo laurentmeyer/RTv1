@@ -16,7 +16,8 @@ typedef struct		s_hit
 	// t_v4			normal;
 }					t_hit;
 
-void				get_collision(t_hit *out, t_ray *ray, t_object *object);
+void				get_collision(t_hit *out, t_ray ray, t_object *object);
 void				hit_sphere(t_hit *out, t_ray *ray, t_object *sphere);
+void				hit_plane(t_hit *out, t_ray *ray, t_object *plane);
 
 #endif

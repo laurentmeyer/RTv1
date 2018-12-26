@@ -21,9 +21,11 @@ void	offset_ray(t_ray *ray, t_object *ob)
 	ray->direction = scale(ray->direction, inverse_scale);
 }
 
-void	get_collision(t_hit *out, t_ray *ray, t_object *object)
+void	get_collision(t_hit *out, t_ray ray, t_object *object)
 {
-	offset_ray(ray, object);
+	offset_ray(&ray, object);
 	if (object->type == SPHERE)
-		hit_sphere(out, ray, object);
+		hit_sphere(out, &ray, object);
+	else if (object->type == PLANE)
+		hit_plane(out, &ray, object);
 }
