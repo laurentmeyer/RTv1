@@ -1,104 +1,72 @@
 #include "rtv1.h"
 #include "raytracer.h"
 #include "ft_math.h"
+#include "color.h"
 #include <float.h>
-#include <stdio.h> //
 
 void			screen_to_world(t_ram *ram, t_ray *ray, int x, int y)
 {
 	if (x == WIN_W / 2 && y == WIN_H / 2)
 		x = WIN_W / 2;
 	ray->origin = ram->scene->camera.position;
-	ray->direction.x = lerp_double(ram->scene->camera.up_left.x,
-				ram->scene->camera.down_right.x, (double)x / WIN_W);
-	ray->direction.y = lerp_double(ram->scene->camera.up_left.y,
-				ram->scene->camera.down_right.y, (double)y / WIN_H);
-				// a optimiser avec ajout de constantes au lieu de lerp
-	ray->direction.z = ram->scene->camera.eye_distance;
+	ray->direction.x = ram->scene->camera.up_left.x + x * ram->scene->camera.pixel_steps.x;
+	ray->direction.y = ram->scene->camera.up_left.y + y * ram->scene->camera.pixel_steps.y;
+	ray->direction.z = ram->scene->camera.up_left.z;
+	ray->direction = normalize(ray->direction); // optimiser, je pense que ce calcul peut être évité
 }
 
-void			apply_inverse_transform(t_hit *hit)
-{
-	t_v3	inverse_scale;
-
-	inverse_scale = (t_v3){1 / hit->object->scale.x,
-			1 / hit->object->scale.y, 1 / hit->object->scale.z };
-	hit->normal = scale(hit->normal, inverse_scale);
-	hit->normal = rotate_x(hit->normal, hit->object->rotation.x);
-	hit->normal = rotate_y(hit->normal, hit->object->rotation.y);
-	hit->normal = rotate_z(hit->normal, hit->object->rotation.z);
-	hit->point = scale(hit->point, hit->object->scale);
-	hit->point = rotate_x(hit->normal, hit->object->rotation.x);
-	hit->point = rotate_y(hit->normal, hit->object->rotation.y);
-	hit->point = rotate_z(hit->normal, hit->object->rotation.z);
-	hit->point = translate(hit->normal, hit->object->position);
-}
-
-int			closest_intersection(t_scene *scene, t_ray *ray, t_hit *dst)
+int			closest_intersection(t_scene *scene, t_ray * const ray, t_hit *dst)
 {
 	size_t			i;
-	double			d;
 	double			min_dist;
 	t_hit			tmp;
+	int				found;
 	
 	min_dist = DBL_MAX;
 	i = 0;
+	found = FALSE;
 	while (i < scene->objects_count)
 	{
-		if ((d = get_collision(&tmp, *ray, scene->objects[i])) > 0.
-			&& d < min_dist)
+		if (hit_object(&tmp, *ray, scene->objects[i]) && tmp.t < min_dist)
 		{
-			min_dist = d;
+			min_dist = tmp.t;
 			*dst = tmp;
+			dst->object = scene->objects[i];
+			found = TRUE;
 		}
 		++i;
 	}
-	if (!(min_dist < DBL_MAX && min_dist > 0.))
-		return (0);
-	// apply_inverse_transform(dst);
-	return (1);
+	return (found);
 }
 
-unsigned int	normal_color(t_v3 *normal)
+void render_pixel(unsigned int *out, t_ram *ram, int x, int y)
 {
-	unsigned int	red;
-	unsigned int	green;
-	unsigned int	blue;
-
-	red = (int)(0xFF * (normal->x + 1.) / 2.);
-	green = (int)(0xFF * (normal->y + 1.) / 2.);
-	blue = (int)(0xFF * (normal->z + 1.) / 2.);
-	return ((unsigned int)(red << 16 | green << 8 | blue));
-}
-
-unsigned int	render_pixel(t_ram *ram, int x, int y)
-{
-	t_ray			ray;
-	t_hit			hit;
-	unsigned int	color;
-	double			shade;
+	t_ray ray;
+	t_hit hit;
+	t_color color;
 
 	screen_to_world(ram, &ray, x, y);
+	color = (t_color){0., 0., 0.};
 	if (closest_intersection(ram->scene, &ray, &hit))
 	{
-		// color = normal_color(&(hit.normal));
-		shade = dot_product(ram->scene->lights[0]->direction, hit.normal);
-		if (shade < 0)
-			shade = 0;
-		color = lerp_color(hit.object->color, (0.2 + 0.8 * shade));
-		return (color);
+		get_normal(&hit, &ray);
+		shade_pixel(ram, &hit, &ray, &color);
 	}
-	return (0x0);
+	int_of_color(out, &color);
 }
 
 int render_scene(t_ram *ram)
 {
 	t_image *img;
+	unsigned int color;
 
 	img = ram->display->mlx_img;
 	for (int i = 0; i < WIN_W; i++)
 		for (int j = 0; j < WIN_H; j++)
-			pixel_put(ram->display->mlx_img, i, j, render_pixel(ram, i, j));
+		{
+			render_pixel(&color, ram, i, j);
+			pixel_put(ram->display->mlx_img, i, j, color);
+		}
 	mlx_put_image_to_window(ram->display->mlx_ptr,
 							ram->display->mlx_win->win_ptr, ram->display->mlx_img->img_ptr,
 							0, 0);

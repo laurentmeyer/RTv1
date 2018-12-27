@@ -14,11 +14,12 @@ SRCFILES =						\
 			hooks.c				\
 			main.c				\
 			math.c				\
+			color.c				\
 			object.c			\
-			collisions.c		\
+			object_sphere.c		\
+			object_plane.c		\
+			intersections.c		\
 			transformations.c	\
-			shape_sphere.c		\
-			shape_plane.c		\
 			geometry.c			\
 			shading.c			\
 			render.c		

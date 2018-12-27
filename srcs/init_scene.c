@@ -9,10 +9,9 @@ static void		update_camera(t_camera *cam)
 {
 	cam->up_left.x = cam->eye_distance * tan(-cam->h_fov / 2);
 	cam->up_left.y = - cam->up_left.x * WIN_H / WIN_W;
-	cam->up_left.z = cam->eye_distance;
-	cam->down_right.x = - cam->up_left.x;
-	cam->down_right.y = - cam->up_left.y;
-	cam->down_right.z = - cam->up_left.z;
+	cam->up_left.z =  - cam->eye_distance;
+	cam->pixel_steps.x = -2. * cam->up_left.x / WIN_W;
+	cam->pixel_steps.y = -2. * cam->up_left.y / WIN_H;
 }
 
 void			init_scene(t_ram *ram)

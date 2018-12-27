@@ -10,6 +10,7 @@
 		"math.h": "c",
 		"stdlib.h": "c",
 		"ft_math.h": "c",
-		"geometry.h": "c"
+		"geometry.h": "c",
+		"raytracer.h": "c"
 	}
 }

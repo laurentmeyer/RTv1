@@ -7,6 +7,7 @@
 # include "object.h"
 # include "raytracer.h"
 # include "scene.h"
+# include "color.h"
 
 # define ERROR -1
 # define SUCCESS 0
@@ -28,8 +29,8 @@ void				init_scene(t_ram *ram);
 void 				free_scene(t_scene *scene);
 int					init_hooks(t_ram *ram);
 void				pixel_put(t_image *img, int x, int y, unsigned int color);
-unsigned int		lerp_color(unsigned int color, double ratio);
 int					render_scene(t_ram *ram);
 void				exit_message(t_ram *ram, int exit_code, char *message);
+void				shade_pixel(t_ram *ram, t_hit *h, t_ray *ray, t_color *color);
 
 #endif

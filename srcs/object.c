@@ -16,7 +16,7 @@ t_object	*new_object(int type)
 	return (obj);
 }
 
-t_light		*new_light(t_v3 direction)
+t_light		*new_light(t_v3 direction, double intensity)
 {
 	t_light		*light;
 	
@@ -24,6 +24,10 @@ t_light		*new_light(t_v3 direction)
 	{
 		ft_bzero(light, sizeof(t_light));
 		light->direction = normalize(direction);
+		if (intensity < 0. || intensity > 1.)
+			light->intensity = intensity < 0. ? 0. : 1.;
+		else
+			light->intensity = intensity;
 	}
 	return (light);
 }

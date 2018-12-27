@@ -14,6 +14,10 @@ typedef struct		s_v3
 	double			z;
 }					t_v3;
 
+t_v3				add_v3(t_v3 a, t_v3 b);
+t_v3				sub_v3(t_v3 a, t_v3 b);
+t_v3				mul_v3(t_v3 a, double b);
+t_v3				div_v3(t_v3 a, double b);
 t_v3				inverse(t_v3 v);
 double				magnitude(t_v3 vector);
 t_v3				normalize(t_v3 v);

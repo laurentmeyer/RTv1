@@ -1,6 +1,26 @@
 #include "geometry.h"
 #include <math.h>
 
+t_v3				add_v3(t_v3 a, t_v3 b)
+{
+	return ((t_v3){ a.x + b.x, a.y + b.y, a.z + b.z });
+}
+
+t_v3				sub_v3(t_v3 a, t_v3 b)
+{
+	return ((t_v3){ a.x - b.x, a.y - b.y, a.z - b.z });
+}
+
+t_v3				mul_v3(t_v3 a, double b)
+{
+	return ((t_v3){ a.x * b, a.y * b, a.z * b });
+}
+
+t_v3				div_v3(t_v3 a, double b)
+{
+	return (mul_v3(a, 1. / b));
+}
+
 t_v3	inverse(t_v3 v)
 {
 	return ((t_v3){- v.x, - v.y, - v.z});
@@ -13,10 +33,7 @@ double	magnitude(t_v3 v)
 
 t_v3	normalize(t_v3 v)
 {
-	double	inv_mag;
-
-	inv_mag = 1. / magnitude(v);
-	return((t_v3){v.x * inv_mag, v.y * inv_mag, v.z * inv_mag});
+	return(mul_v3(v, 1. / magnitude(v)));
 }
 
 double	dot_product(t_v3 a, t_v3 b)
