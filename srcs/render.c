@@ -2,7 +2,6 @@
 #include "raytracer.h"
 #include "ft_math.h"
 #include "color.h"
-#include <float.h>
 
 void			screen_to_world(t_ram *ram, t_ray *ray, int x, int y)
 {
@@ -13,30 +12,6 @@ void			screen_to_world(t_ram *ram, t_ray *ray, int x, int y)
 	ray->direction.y = ram->scene->camera.up_left.y + y * ram->scene->camera.pixel_steps.y;
 	ray->direction.z = ram->scene->camera.up_left.z;
 	ray->direction = normalize(ray->direction); // optimiser, je pense que ce calcul peut être évité
-}
-
-int			closest_intersection(t_scene *scene, t_ray * const ray, t_hit *dst)
-{
-	size_t			i;
-	double			min_dist;
-	t_hit			tmp;
-	int				found;
-	
-	min_dist = DBL_MAX;
-	i = 0;
-	found = FALSE;
-	while (i < scene->objects_count)
-	{
-		if (hit_object(&tmp, *ray, scene->objects[i]) && tmp.t < min_dist)
-		{
-			min_dist = tmp.t;
-			*dst = tmp;
-			dst->object = scene->objects[i];
-			found = TRUE;
-		}
-		++i;
-	}
-	return (found);
 }
 
 void render_pixel(unsigned int *out, t_ram *ram, int x, int y)

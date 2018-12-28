@@ -3,10 +3,12 @@
 
 # include "geometry.h"
 # include "color.h"
-# define SPHERE    0
-# define PLANE     1
-# define CYLYNDER  2
-# define CONE      3
+# define SPHERE      0
+# define PLANE       1
+# define CYLYNDER    2
+# define CONE        3
+# define DIRECTIONAL 0
+# define SPOT        1
 
 typedef	struct		s_material
 {
@@ -37,7 +39,9 @@ typedef struct		s_camera
 
 typedef struct		s_light
 {
+	int				type;
 	t_v3			direction;
+	t_v3			position;
 	double			intensity;
 }					t_light;
 

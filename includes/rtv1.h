@@ -31,6 +31,8 @@ int					init_hooks(t_ram *ram);
 void				pixel_put(t_image *img, int x, int y, unsigned int color);
 int					render_scene(t_ram *ram);
 void				exit_message(t_ram *ram, int exit_code, char *message);
+int					intersection(t_scene *scene, t_ray * const ray, double epsilon);
+int					closest_intersection(t_scene *scene, t_ray * const ray, t_hit *dst);
 void				shade_pixel(t_ram *ram, t_hit *h, t_ray *ray, t_color *color);
 
 #endif

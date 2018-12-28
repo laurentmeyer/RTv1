@@ -13,6 +13,7 @@ typedef struct		s_scene
 	size_t			objects_count;
 	t_light			*lights[MAX_LIGHTS];
 	size_t			lights_count;
+	double			ambiant_light;
 }					t_scene;
 
 #endif

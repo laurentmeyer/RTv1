@@ -21,6 +21,7 @@ void			init_scene(t_ram *ram)
 	ft_bzero(ram->scene, sizeof(t_scene));
 	ram->scene->camera.eye_distance = .4;
 	ram->scene->camera.h_fov = radians(40);
+	ram->scene->ambiant_light = 0.15;
 	update_camera(&ram->scene->camera);
 }
 
