@@ -11,6 +11,8 @@
 		"stdlib.h": "c",
 		"ft_math.h": "c",
 		"geometry.h": "c",
-		"raytracer.h": "c"
+		"raytracer.h": "c",
+		"parsing.h": "c",
+		"get_next_line.h": "c"
 	}
 }

@@ -11,9 +11,14 @@ SRCFILES =						\
 			init_display.c		\
 			init_scene.c		\
 			init_ram.c			\
+			init_parsing.c		\
 			hooks.c				\
 			main.c				\
 			math.c				\
+			parsing.c			\
+			parse_object.c		\
+			parse_light.c		\
+			parse_camera.c		\
 			color.c				\
 			object.c			\
 			object_sphere.c		\

@@ -12,6 +12,8 @@ t_object	*new_object(int type)
 		ft_bzero(obj, sizeof(t_object));
 		obj->type = type;
 		obj->scale = (t_v3){1., 1., 1.};
+		obj->material.color = (t_color){1., 1., 1.};
+		obj->material.diffuse = 1.;
 	}
 	return (obj);
 }

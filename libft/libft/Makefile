@@ -68,6 +68,7 @@ SRCFILES =	ft_memset.c			\
 			get_next_line.c		\
 			ft_countwords.c		\
 			ft_atoi_hex.c		\
+			ft_atof.c			\
 			ft_is_hex_str.c		\
 			ft_strndup.c		\
 			ft_insert_str.c		\

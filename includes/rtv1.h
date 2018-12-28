@@ -8,6 +8,7 @@
 # include "raytracer.h"
 # include "scene.h"
 # include "color.h"
+# include "parsing.h"
 
 # define ERROR -1
 # define SUCCESS 0
@@ -16,17 +17,24 @@
 
 typedef struct		s_ram
 {
+	t_parsing		parsing;
 	t_display		*display;
 	t_scene			*scene;
 }					t_ram;
 
+void				parse_file(t_ram *ram);
+int					parse_object(t_ram *ram);
+int					parse_camera(t_ram *ram);
+int					parse_light(t_ram *ram);
 int					main_loop(t_ram *ram);
-t_ram				*init_ram(void);
+t_ram				*init_ram_pre_parsing(void);
+void				init_ram_post_parsing(t_ram *ram);
 void				free_ram(t_ram *ram);
 void				init_display(t_ram *ram);
 void				free_display(t_display *display);
 void				init_scene(t_ram *ram);
 void 				free_scene(t_scene *scene);
+void				free_parsing(t_parsing *parsing);
 int					init_hooks(t_ram *ram);
 void				pixel_put(t_image *img, int x, int y, unsigned int color);
 int					render_scene(t_ram *ram);

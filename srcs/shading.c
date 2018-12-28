@@ -52,8 +52,8 @@ void shade_pixel(t_ram *ram, t_hit *hit, t_ray *ray, t_color *out)
 {
 	size_t i;
 
-	// *out = mul_v3(hit->object->material.color, ram->scene->ambiant_light);
-	*out = mul_v3(hit->object->material.color, 0.);
+	*out = mul_v3(hit->object->material.color, ram->scene->ambiant_light);
+	// *out = mul_v3(hit->object->material.color, 0.);
 	i = 0;
 	while (i < ram->scene->lights_count)
 		*out = add_color(*out, shade_one_light(ram, hit, ray, ram->scene->lights[i++]));

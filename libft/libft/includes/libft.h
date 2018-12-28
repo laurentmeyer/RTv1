@@ -117,5 +117,6 @@ char					*ft_basename(char *path);
 char					**ft_argsplit(int *aac, char **av);
 int						ft_intlen(int n);
 void					ft_swap_int(int *a, int *b);
+double					ft_atof(char *s);
 
 #endif
