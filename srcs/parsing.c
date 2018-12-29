@@ -15,30 +15,34 @@ size_t		count_args(char **args)
 
 int parse_line(t_ram *ram, char *start)
 {
-	static int curr_type = -1;
+	static char		*dict[] = {"object", "camera", "light", NULL};
+	static parse_f	funs[] = {&parse_object, &parse_camera, &parse_light, NULL};
+	static int		curr_index = -1;
+	int				index;
 
 	if (NULL != ram->parsing.split)
 	{
 		ft_free_strsplit(&(ram->parsing.split));
 		ram->parsing.split = NULL;
 	}
-	if (NULL != start)
+	if (NULL == start && -1 != curr_index)
 	{
-		ram->parsing.split = ft_strsplit(start, '\t');
-		if (0 == ft_strcmp(ram->parsing.split[0], "object"))
-			curr_type = I_OBJECT;
-		else if (0 == ft_strcmp(ram->parsing.split[0], "camera"))
-			curr_type = I_CAMERA;
-		else if (0 == ft_strcmp(ram->parsing.split[0], "light"))
-			curr_type = I_LIGHT;
+		ram->parsing.flush = TRUE;
+		(funs[curr_index])(ram);
 	}
-	if (I_OBJECT == curr_type)
-		return (parse_object(ram));
-	else if (I_LIGHT == curr_type)
-		return (parse_light(ram));
-	else if (I_CAMERA == curr_type)
-		return (parse_camera(ram));
-	return (ERROR);
+	if (NULL != start && (ram->parsing.split = ft_strsplit(start, '\t'))
+		&& (-1 != (index = ft_index((char **)dict, ram->parsing.split[0]))))
+	{
+		if (-1 != curr_index)
+		{
+			ram->parsing.flush = TRUE;
+			(funs[curr_index])(ram);
+		}
+		curr_index = index;
+	}
+	if (-1 != curr_index)
+		return ((*(funs[curr_index]))(ram));
+	return (SUCCESS);
 }
 
 char *format_line(char *str)
@@ -80,7 +84,7 @@ void parse_file(t_ram *ram)
 		{
 			ft_putstr_fd("Parsing error near: ", 2);
 			ft_putstr_fd(start, 2);
-			break ;
+			break;
 		}
 	}
 	parse_line(ram, NULL);

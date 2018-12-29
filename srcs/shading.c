@@ -15,7 +15,7 @@ void		point_to_light(t_v3 *direction, double *intensity, t_light *light, t_v3 *p
 
 	*intensity = light->intensity;
 	if (light->type == DIRECTIONAL)
-		*direction = light->direction;
+		*direction = inverse(light->direction);
 	else if (light->type == SPOT)
 	{
 		vec = sub_v3(light->position, *point);

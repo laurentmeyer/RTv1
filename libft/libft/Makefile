@@ -79,6 +79,7 @@ SRCFILES =	ft_memset.c			\
 			ft_valid_int_str.c	\
 			ft_wcrtoutf.c		\
 			gnlite.c			\
+			ft_index.c			\
 			ft_getopt.c			\
 			ft_lstpop.c			\
 			ft_lstsort.c		\

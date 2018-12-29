@@ -1,8 +1,27 @@
-# directional light
-#light		directional
-#direction	.5 -1.	1.
+#######################
+###     camera      ###
+#######################
+camera
+position	0.	.2	5.
+#rotation	0.	0	.05
 
-## sphere
+#######################
+###   spot light    ###
+#######################
+light 		spot
+position	-1.	2.	-1.
+intensity	1.
+	
+#######################
+## directional light ##
+#######################
+light 		directional
+direction	-1.	-2.	1.
+intensity	.7
+
+#######################
+###      sphere     ###
+#######################
 object		sphere
 diffuse		.3
 specular	.9
@@ -11,7 +30,9 @@ scale		.5	.5	.5
 position	.7	2.	-5
 color		1.	.5	.5
 
-## sphere
+#######################
+###      sphere     ###
+#######################
 object		sphere
 diffuse		.8
 specular	.5
@@ -19,7 +40,9 @@ phong		100
 position	-.3	.4	-3
 color		.3	.9	.7
 
-## plane
+#######################
+###      plane      ###
+#######################
 object		plane
 color		0.3	.8	1.
-rotation	0.	0	.05
+#rotation	0.	0	.05

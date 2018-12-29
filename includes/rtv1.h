@@ -22,6 +22,8 @@ typedef struct		s_ram
 	t_scene			*scene;
 }					t_ram;
 
+typedef int			(*parse_f)(t_ram *ram);
+
 void				parse_file(t_ram *ram);
 int					parse_object(t_ram *ram);
 int					parse_camera(t_ram *ram);

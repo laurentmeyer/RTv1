@@ -57,8 +57,11 @@ int parse_object(t_ram *ram)
 	args = ram->parsing.split;
 	if (MAX_OBJECTS == ram->scene->objects_count)
 		return (SUCCESS);
-	if (NULL == args)
+	if (NULL == args || ram->parsing.flush)
+	{
 		object = push_object(ram, object);
+		ram->parsing.flush = FALSE;
+	}
 	else if (2 == count_args(args) && 0 == ft_strcmp(args[0], "object"))
 	{
 		push_object(ram, object);

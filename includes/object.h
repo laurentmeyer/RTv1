@@ -47,7 +47,7 @@ typedef struct		s_light
 
 t_object			*new_object(int type);
 void				destroy_object(t_object *obj);
-t_light				*new_light(t_v3 direction, double intensity);
+t_light				*new_light(int type);
 void				destroy_light(t_light *light);
 
 #endif

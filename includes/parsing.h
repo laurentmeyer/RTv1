@@ -7,6 +7,7 @@
 # define I_OBJECT 1
 # define I_CAMERA 2
 
+
 typedef struct		s_i_object
 {
 	int				type;
@@ -29,18 +30,7 @@ typedef struct		s_parsing
 	int				fd;
 	char			*line;
 	char			**split;
-	int				win_h;
-	int				win_w;
-	t_v3			camera_position;
-	t_v3			camera_rotation;
-	double			focal_length;
-	double			horizontal_fov;
-	t_i_object		objects[MAX_OBJECTS];
-	size_t			objects_count;
-	t_i_light		lights[MAX_LIGHTS];
-	size_t			lights_count;
-	double			ambiant_light;
-
+	int				flush;
 }					t_parsing;
 
 size_t				count_args(char **args);
