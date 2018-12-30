@@ -22,6 +22,7 @@ SRCFILES =						\
 			color.c				\
 			object.c			\
 			object_sphere.c		\
+			object_cylinder.c	\
 			object_plane.c		\
 			intersections.c		\
 			transformations.c	\

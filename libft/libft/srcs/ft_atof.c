@@ -13,7 +13,9 @@ double		ft_atof(char *s)
 	if (0 == decimal)
 		return ((double)integer);
 	after_point = 1;
-	while (after_point < decimal)
+	while (after_point <= decimal)
 		after_point *= 10;
+	if (integer < 0)
+		return ((double)integer - (double)decimal / after_point);
 	return ((double)integer + (double)decimal / after_point);
 }

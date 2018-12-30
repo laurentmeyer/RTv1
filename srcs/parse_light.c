@@ -22,8 +22,9 @@ static int		parse_args(char **args, t_light *light)
 	if ((c = count_args(args)) == 4)
 	{
 		vec = (t_v3){ft_atof(args[1]), ft_atof(args[2]), ft_atof(args[3])};
+		// printf("x=%.2f y=%.2f z=%.2f\n", vec.x, vec.y, vec.z);
 		if (0 == strcmp(args[0], "position"))
-			light->position = normalize(vec);
+			light->position = vec;
 		else if (0 == strcmp(args[0], "direction"))
 			light->direction = normalize(vec);
 		else

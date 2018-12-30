@@ -35,7 +35,7 @@ t_color		shade_one_light(t_ram *ram, t_hit *hit, t_ray *ray, t_light *light)
 	point_to_light(&(l.direction), &intensity, light, &(hit->point));
 	l.origin = hit->point;
 	color = (t_color){0., 0., 0.};
-	if (intersection(ram->scene, &l, 0.00001))
+	if (intersection(ram->scene, &l, 0.0001))
 		return (color);
 	diffuse = dot_product(l.direction, hit->normal);
 	if (diffuse > 0.)

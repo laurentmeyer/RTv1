@@ -2,8 +2,10 @@
 #include "libft.h"
 #include "get_next_line.h"
 #include "rtv1.h"
+#include "ft_math.h"
 #include "geometry.h"
 #include "object.h"
+#include <stdio.h>
 
 static t_object *push_object(t_ram *ram, t_object *object)
 {
@@ -22,12 +24,18 @@ static int		parse_args(char **args, t_object *object)
 	if ((c = count_args(args)) == 4)
 	{
 		vec = (t_v3){ft_atof(args[1]), ft_atof(args[2]), ft_atof(args[3])};
+		// printf("x=%.2f y=%.2f z=%.2f\n", vec.x, vec.y, vec.z);
 		if (0 == strcmp(args[0], "position"))
 			object->position = vec;
 		else if (0 == strcmp(args[0], "scale"))
 			object->scale = vec;
 		else if (0 == strcmp(args[0], "rotation"))
-			object->rotation = vec;
+		{
+			object->direction = (t_v3){0., 1., 0.};
+			object->direction = rotate_x(object->direction, radians(vec.x));
+			object->direction = rotate_y(object->direction, radians(vec.y));
+			object->direction = rotate_z(object->direction, radians(vec.z));
+		}
 		else if (0 == strcmp(args[0], "color"))
 			object->material.color = vec;
 		else
@@ -69,6 +77,8 @@ int parse_object(t_ram *ram)
 			object = new_object(SPHERE);
 		else if (0 == ft_strcmp(args[1], "plane"))
 			object = new_object(PLANE);
+		else if (0 == ft_strcmp(args[1], "cylinder"))
+			object = new_object(CYLINDER);
 	}
 	else
 		return (parse_args(args, object));

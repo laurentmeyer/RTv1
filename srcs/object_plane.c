@@ -8,9 +8,9 @@ int		hit_plane(t_hit *out, t_ray *ray, t_object *plane)
 	t_v3	diff;
 
 	out->normal = (t_v3){0., 1., 0.};
-	out->normal = rotate_x(out->normal, plane->rotation.x);
-	out->normal = rotate_y(out->normal, plane->rotation.y);
-	out->normal = rotate_z(out->normal, plane->rotation.z);
+	out->normal = rotate_x(out->normal, plane->direction.x);
+	out->normal = rotate_y(out->normal, plane->direction.y);
+	out->normal = rotate_z(out->normal, plane->direction.z);
 	diff = (t_v3){plane->position.x - ray->origin.x,
 		plane->position.y - ray->origin.y, plane->position.z - ray->origin.z};
 	out->t = dot_product(out->normal, ray->direction);

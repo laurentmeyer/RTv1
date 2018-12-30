@@ -11,7 +11,10 @@ void			screen_to_world(t_ram *ram, t_ray *ray, int x, int y)
 	ray->direction.x = ram->scene->camera.up_left.x + x * ram->scene->camera.pixel_steps.x;
 	ray->direction.y = ram->scene->camera.up_left.y + y * ram->scene->camera.pixel_steps.y;
 	ray->direction.z = ram->scene->camera.up_left.z;
-	ray->direction = normalize(ray->direction); // optimiser, je pense que ce calcul peut être évité
+	ray->direction = rotate_x(ray->direction, radians(ram->scene->camera.rotation.x));
+	ray->direction = rotate_y(ray->direction, radians(ram->scene->camera.rotation.y));
+	ray->direction = rotate_z(ray->direction, radians(ram->scene->camera.rotation.z));
+	ray->direction = normalize(ray->direction);
 }
 
 void render_pixel(unsigned int *out, t_ram *ram, int x, int y)

@@ -7,8 +7,11 @@
 void		get_normal(t_hit *out, t_ray *ray)
 {
 	out->point = add_v3(ray->origin, mul_v3(ray->direction, out->t));
+	out->ray = ray;
 	if (out->object->type == SPHERE)
 		normal_sphere(out);
+	else if (out->object->type == CYLINDER)
+		normal_cylinder(out);
 }
 
 int		hit_object(t_hit *out, t_ray ray, t_object *object)
@@ -17,6 +20,8 @@ int		hit_object(t_hit *out, t_ray ray, t_object *object)
 		return (hit_sphere(out, &ray, object));
 	if (object->type == PLANE)
 		return (hit_plane(out, &ray, object));
+	if (object->type == CYLINDER)
+		return (hit_cylinder(out, &ray, object));
 	return (0);
 }
 
