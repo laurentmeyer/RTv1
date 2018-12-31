@@ -3,7 +3,6 @@
 #include "ft_math.h"
 #include <math.h>
 #include <stdlib.h>
-#include <stdio.h> //
 
 static void		update_camera(t_camera *cam)
 {

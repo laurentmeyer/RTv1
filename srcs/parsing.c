@@ -20,8 +20,8 @@ int parse_line(t_ram *ram, char *start)
 	static int			curr_index = -1;
 	int					index;
 
-	if (NULL != start)
-		ft_putendl(start);
+	// if (NULL != start)
+	// 	ft_putendl(start);
 	if (NULL != ram->parsing.split)
 	{
 		ft_free_strsplit(&(ram->parsing.split));
@@ -84,9 +84,9 @@ void t_parse_file(t_ram *ram)
 		start = format_line(ram->parsing.line);
 		if (*start != '#' && *start != '\0' && ERROR == parse_line(ram, start))
 		{
-			ft_putstr_fd("Parsing error near: ", 2);
-			ft_putstr_fd(start, 2);
-			break;
+			ft_putstr_fd("Parsing error near: \"", 2);
+			ft_putstr_fd(ram->parsing.line, 2);
+			exit_message(ram, ERROR, "\"\n");
 		}
 	}
 	parse_line(ram, NULL);

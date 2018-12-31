@@ -5,9 +5,9 @@
 
 t_object	*new_object(char *type)
 {
-	static char		*dict[] = {"sphere", "plane", "cylinder", NULL};
-	static t_hit_f	hit[] = {&hit_sphere, &hit_plane, &hit_cylinder, NULL};
-	static t_norm_f	norm[] = {&normal_sphere, &normal_plane, &normal_cylinder, NULL};
+	static char		*dict[] = {"sphere", "plane", "cylinder", "cone", NULL};
+	static t_hit_f	hit[] = {&hit_sphere, &hit_plane, &hit_cylinder, &hit_cone, NULL};
+	static t_norm_f	norm[] = {&normal_sphere, &normal_plane, &normal_cylinder, &normal_cylinder, NULL};
 	int				index;
 	t_object		*obj;
 

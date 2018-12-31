@@ -21,6 +21,7 @@ SRCFILES =						\
 			parse_camera.c		\
 			color.c				\
 			object.c			\
+			object_cone.c		\
 			object_sphere.c		\
 			object_cylinder.c	\
 			object_plane.c		\

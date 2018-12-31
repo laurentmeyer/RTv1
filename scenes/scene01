@@ -1,0 +1,15 @@
+#######################
+###   spot light    ###
+#######################
+light 		spot
+position	2.	3.	2.
+
+#######################
+###      sphere     ###
+#######################
+object		sphere
+color		1.	0.	0.
+position	0	0	-5
+diffuse		.8
+specular	.9
+phong		1000
