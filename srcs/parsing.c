@@ -15,11 +15,13 @@ size_t		count_args(char **args)
 
 int parse_line(t_ram *ram, char *start)
 {
-	static char		*dict[] = {"object", "camera", "light", NULL};
-	static parse_f	funs[] = {&parse_object, &parse_camera, &parse_light, NULL};
-	static int		curr_index = -1;
-	int				index;
+	static char			*dict[] = {"object", "camera", "light", NULL};
+	static t_parse_f	funs[] = {&parse_object, &parse_camera, &parse_light, NULL};
+	static int			curr_index = -1;
+	int					index;
 
+	if (NULL != start)
+		ft_putendl(start);
 	if (NULL != ram->parsing.split)
 	{
 		ft_free_strsplit(&(ram->parsing.split));
@@ -62,7 +64,7 @@ char *format_line(char *str)
 	return (line);
 }
 
-void parse_file(t_ram *ram)
+void t_parse_file(t_ram *ram)
 {
 	int g;
 	char *start;

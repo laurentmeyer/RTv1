@@ -73,12 +73,17 @@ int parse_object(t_ram *ram)
 	else if (2 == count_args(args) && 0 == ft_strcmp(args[0], "object"))
 	{
 		push_object(ram, object);
-		if (0 == ft_strcmp(args[1], "sphere"))
-			object = new_object(SPHERE);
-		else if (0 == ft_strcmp(args[1], "plane"))
-			object = new_object(PLANE);
-		else if (0 == ft_strcmp(args[1], "cylinder"))
-			object = new_object(CYLINDER);
+		if (NULL == (object = new_object(args[1])))
+		{
+			ft_putstr_fd("Unable to create object: ", 2);
+			exit_message(ram, ERROR, args[1]);
+		}
+		// if (0 == ft_strcmp(args[1], "sphere"))
+		// 	object = new_object(SPHERE);
+		// else if (0 == ft_strcmp(args[1], "plane"))
+		// 	object = new_object(PLANE);
+		// else if (0 == ft_strcmp(args[1], "cylinder"))
+		// 	object = new_object(CYLINDER);
 	}
 	else
 		return (parse_args(args, object));

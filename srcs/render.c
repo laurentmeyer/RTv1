@@ -2,6 +2,8 @@
 #include "raytracer.h"
 #include "ft_math.h"
 #include "color.h"
+#include "scene.h"
+#include <float.h>
 
 void			screen_to_world(t_ram *ram, t_ray *ray, int x, int y)
 {
@@ -17,17 +19,64 @@ void			screen_to_world(t_ram *ram, t_ray *ray, int x, int y)
 	ray->direction = normalize(ray->direction);
 }
 
+int			intersection(t_scene *scene, t_ray * const ray, double epsilon)
+{
+	size_t			i;
+	t_hit			tmp;
+	t_hit_f			fun;
+	
+	i = 0;
+	while (i < scene->objects_count)
+	{
+		fun = (t_hit_f)(scene->objects[i]->hit_f);
+		if ((*fun)(&tmp, ray, scene->objects[i]) && tmp.t > epsilon)
+			return (TRUE);
+		++i;
+	}
+	return (FALSE);
+}
+
+int			closest_intersection(t_scene *scene, t_ray * const ray, t_hit *dst)
+{
+	size_t			i;
+	double			min_dist;
+	t_hit			tmp;
+	t_hit_f			fun;
+	int				found;
+	
+	min_dist = DBL_MAX;
+	i = 0;
+	found = FALSE;
+	while (i < scene->objects_count)
+	{
+		fun = (t_hit_f)(scene->objects[i]->hit_f);
+		if ((*fun)(&tmp, ray, scene->objects[i]) && tmp.t < min_dist)
+		{
+			min_dist = tmp.t;
+			*dst = tmp;
+			dst->object = scene->objects[i];
+			found = TRUE;
+		}
+		++i;
+	}
+	return (found);
+}
+
 void render_pixel(unsigned int *out, t_ram *ram, int x, int y)
 {
-	t_ray ray;
-	t_hit hit;
-	t_color color;
+	t_ray		ray;
+	t_hit		hit;
+	t_color		color;
+	t_norm_f	fun;
 
 	screen_to_world(ram, &ray, x, y);
 	color = (t_color){0., 0., 0.};
 	if (closest_intersection(ram->scene, &ray, &hit))
 	{
-		get_normal(&hit, &ray);
+		hit.point = add_v3(ray.origin, mul_v3(ray.direction, hit.t));
+		hit.ray = ray;
+		fun = (t_norm_f)hit.object->norm_f;
+		(*fun)(&hit);
 		shade_pixel(ram, &hit, &ray, &color);
 	}
 	int_of_color(out, &color);
@@ -46,7 +95,8 @@ int render_scene(t_ram *ram)
 			pixel_put(ram->display->mlx_img, i, j, color);
 		}
 	mlx_put_image_to_window(ram->display->mlx_ptr,
-							ram->display->mlx_win->win_ptr, ram->display->mlx_img->img_ptr,
+							ram->display->mlx_win->win_ptr,
+							ram->display->mlx_img->img_ptr,
 							0, 0);
 	return (SUCCESS);
 }

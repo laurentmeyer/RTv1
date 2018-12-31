@@ -45,8 +45,8 @@ void		normal_cylinder(t_hit *out)
 {
 	double		m;
 
-	m = dot_product(out->ray->direction, out->object->direction) * out->t;
-	m += dot_product(sub_v3(out->ray->origin, out->object->position), out->object->direction);
+	m = dot_product(out->ray.direction, out->object->direction) * out->t;
+	m += dot_product(sub_v3(out->ray.origin, out->object->position), out->object->direction);
 	out->normal = sub_v3(out->point, out->object->position);
 	out->normal = sub_v3(out->normal, mul_v3(out->object->direction, m));
 	out->normal = normalize(out->normal);

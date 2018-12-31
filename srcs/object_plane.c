@@ -19,3 +19,9 @@ int		hit_plane(t_hit *out, t_ray *ray, t_object *plane)
 	out->t = dot_product(out->normal, diff) / out->t;
 	return (out->t > 0);
 }
+
+void	normal_plane(t_hit *out)
+{
+	(void)out;
+	return ;
+}
