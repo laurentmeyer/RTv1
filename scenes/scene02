@@ -31,28 +31,13 @@ scale		1.	0.5	1.
 #position	0. 0.  -2.
 rotation	30. 45.	0.
 
-########################
-####    cylinder     ###
-########################
-#object		cylinder
-#color		0.	0.5	.5
-#diffuse		.3
-#specular	.9
-#phong		10
-#position	0. 0.  -2.
-#rotation	0. 90.	45.
-
 #######################
-###      sphere     ###
+###      plane      ###
 #######################
-object		sphere
-color		0.	1.	0.
-diffuse		.3
-specular	.9
-phong		1000
-scale		.5	.5	.5
-position	0.7	0.7	2.
-#position	.7	0.4	-2.
+object		plane
+color		0.9	.5	0.5
+position	0.	-1.	0.
+rotation	0.	0.	.0
 
 #######################
 ###      sphere     ###
@@ -62,12 +47,4 @@ color		1.	0.	0.
 diffuse		.8
 specular	.5
 phong		100
-position	-2.5 .5 .5
-
-#######################
-###      plane      ###
-#######################
-object		plane
-color		0.9	.5	0.5
-position	0.	-1.	0.
-rotation	0.	0.	.0
+position	-2.5 1.5 .5
