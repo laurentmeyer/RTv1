@@ -1,12 +1,17 @@
-#include "rtv1.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hooks.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/18 12:05:15 by jpriou            #+#    #+#             */
+/*   Updated: 2019/01/18 12:11:13 by jpriou           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#define KEY_PRESS_EVENT 2
-#define KEY_RELEASE_EVENT 3
-#define CLOSE_WIN_EVENT 17
-#define CLOSE_WIN_MASK 1L << 17
-#define KEY_PRESS_MASK 1L << 0
-#define KEY_RELEASE_MASK 1L << 1
-#define ESC_KEY 0x35
+#include "rtv1.h"
+#include "hooks.h"
 
 static int		leave(t_ram *ram)
 {
@@ -24,8 +29,8 @@ static int		key_press(int keycode, t_ram *ram)
 int				init_hooks(t_ram *ram)
 {
 	mlx_hook(ram->display->mlx_win->win_ptr,
-			 CLOSE_WIN_EVENT, CLOSE_WIN_MASK, &leave, ram);
+			CLOSE_WIN_EVENT, CLOSE_WIN_MASK, &leave, ram);
 	mlx_hook(ram->display->mlx_win->win_ptr,
-			 KEY_PRESS_EVENT, KEY_PRESS_MASK, &key_press, ram);
+			KEY_PRESS_EVENT, KEY_PRESS_MASK, &key_press, ram);
 	return (SUCCESS);
 }

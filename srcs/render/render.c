@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/18 12:09:45 by jpriou            #+#    #+#             */
+/*   Updated: 2019/01/18 12:42:39 by jpriou           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rtv1.h"
 #include "raytracer.h"
 #include "ft_math.h"
@@ -10,21 +22,26 @@ void			screen_to_world(t_ram *ram, t_ray *ray, int x, int y)
 	if (x == WIN_W / 2 && y == WIN_H / 2)
 		x = WIN_W / 2;
 	ray->origin = ram->scene->camera.position;
-	ray->direction.x = ram->scene->camera.up_left.x + x * ram->scene->camera.pixel_steps.x;
-	ray->direction.y = ram->scene->camera.up_left.y + y * ram->scene->camera.pixel_steps.y;
+	ray->direction.x = ram->scene->camera.up_left.x +
+						x * ram->scene->camera.pixel_steps.x;
+	ray->direction.y = ram->scene->camera.up_left.y +
+						y * ram->scene->camera.pixel_steps.y;
 	ray->direction.z = ram->scene->camera.up_left.z;
-	ray->direction = rotate_x(ray->direction, radians(ram->scene->camera.rotation.x));
-	ray->direction = rotate_y(ray->direction, radians(ram->scene->camera.rotation.y));
-	ray->direction = rotate_z(ray->direction, radians(ram->scene->camera.rotation.z));
+	ray->direction = rotate_x(ray->direction,
+								radians(ram->scene->camera.rotation.x));
+	ray->direction = rotate_y(ray->direction,
+								radians(ram->scene->camera.rotation.y));
+	ray->direction = rotate_z(ray->direction,
+								radians(ram->scene->camera.rotation.z));
 	ray->direction = normalize(ray->direction);
 }
 
-int			intersection(t_scene *scene, t_ray * const ray, double epsilon)
+int				intersection(t_scene *scene, t_ray *const ray, double epsilon)
 {
 	size_t			i;
 	t_hit			tmp;
 	t_hit_f			fun;
-	
+
 	i = 0;
 	while (i < scene->objects_count)
 	{
@@ -36,14 +53,17 @@ int			intersection(t_scene *scene, t_ray * const ray, double epsilon)
 	return (FALSE);
 }
 
-int			closest_intersection(t_scene *scene, t_ray * const ray, t_hit *dst)
+int				closest_intersection(
+					t_scene *scene,
+					t_ray *const ray,
+					t_hit *dst)
 {
 	size_t			i;
 	double			min_dist;
 	t_hit			tmp;
 	t_hit_f			fun;
 	int				found;
-	
+
 	min_dist = DBL_MAX;
 	i = 0;
 	found = FALSE;
@@ -62,7 +82,7 @@ int			closest_intersection(t_scene *scene, t_ray * const ray, t_hit *dst)
 	return (found);
 }
 
-void render_pixel(unsigned int *out, t_ram *ram, int x, int y)
+void			render_pixel(unsigned int *out, t_ram *ram, int x, int y)
 {
 	t_ray		ray;
 	t_hit		hit;
@@ -82,18 +102,23 @@ void render_pixel(unsigned int *out, t_ram *ram, int x, int y)
 	int_of_color(out, &color);
 }
 
-int render_scene(t_ram *ram)
+int				render_scene(t_ram *ram)
 {
-	t_image *img;
-	unsigned int color;
+	t_image			*img;
+	unsigned int	color;
+	int				i[2];
 
 	img = ram->display->mlx_img;
-	for (int i = 0; i < WIN_W; i++)
-		for (int j = 0; j < WIN_H; j++)
+	i[0] = -1;
+	while (++i[0] < WIN_W)
+	{
+		i[1] = -1;
+		while (++i[1] < WIN_H)
 		{
-			render_pixel(&color, ram, i, j);
-			pixel_put(ram->display->mlx_img, i, j, color);
+			render_pixel(&color, ram, i[0], i[1]);
+			pixel_put(ram->display->mlx_img, i[0], i[1], color);
 		}
+	}
 	mlx_put_image_to_window(ram->display->mlx_ptr,
 							ram->display->mlx_win->win_ptr,
 							ram->display->mlx_img->img_ptr,

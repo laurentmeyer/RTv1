@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_camera.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/18 12:07:13 by jpriou            #+#    #+#             */
+/*   Updated: 2019/01/18 12:11:52 by jpriou           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parsing.h"
 #include "libft.h"
 #include "get_next_line.h"
 #include "rtv1.h"
 #include "object.h"
 
-int parse_args(t_ram *ram)
+int		parse_args(t_ram *ram)
 {
 	t_camera	*camera;
-	char 		**args;
+	char		**args;
 	size_t		c;
 	t_v3		vec;
 

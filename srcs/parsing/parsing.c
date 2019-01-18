@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/18 12:07:25 by jpriou            #+#    #+#             */
+/*   Updated: 2019/01/18 13:01:46 by jpriou           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parsing.h"
 #include "libft.h"
 #include "get_next_line.h"
@@ -13,15 +25,12 @@ size_t		count_args(char **args)
 	return (i);
 }
 
-int parse_line(t_ram *ram, char *start)
+static void	prepare_parse_line(
+				t_ram *ram,
+				t_parse_f *funs,
+				char *start,
+				int curr_index)
 {
-	static char			*dict[] = {"object", "camera", "light", NULL};
-	static t_parse_f	funs[] = {&parse_object, &parse_camera, &parse_light, NULL};
-	static int			curr_index = -1;
-	int					index;
-
-	// if (NULL != start)
-	// 	ft_putendl(start);
 	if (NULL != ram->parsing.split)
 	{
 		ft_free_strsplit(&(ram->parsing.split));
@@ -32,6 +41,17 @@ int parse_line(t_ram *ram, char *start)
 		ram->parsing.flush = TRUE;
 		(funs[curr_index])(ram);
 	}
+}
+
+int			parse_line(t_ram *ram, char *start)
+{
+	static char			*dict[] = {"object", "camera", "light", NULL};
+	static t_parse_f	funs[] = {&parse_object, &parse_camera,
+									parse_light, NULL};
+	static int			curr_index = -1;
+	int					index;
+
+	prepare_parse_line(ram, funs, start, curr_index);
 	if (NULL != start && (ram->parsing.split = ft_strsplit(start, '\t'))
 		&& (-1 != (index = ft_index((char **)dict, ram->parsing.split[0]))))
 	{
@@ -47,7 +67,7 @@ int parse_line(t_ram *ram, char *start)
 	return (SUCCESS);
 }
 
-char *format_line(char *str)
+char		*format_line(char *str)
 {
 	char *line;
 
@@ -64,10 +84,10 @@ char *format_line(char *str)
 	return (line);
 }
 
-void t_parse_file(t_ram *ram)
+void		t_parse_file(t_ram *ram)
 {
-	int g;
-	char *start;
+	int		g;
+	char	*start;
 
 	while (42)
 	{
@@ -80,7 +100,7 @@ void t_parse_file(t_ram *ram)
 		if (g < 0)
 			exit_message(ram, -1, "Parsing error\n");
 		if (0 == g)
-			break;
+			break ;
 		start = format_line(ram->parsing.line);
 		if (*start != '#' && *start != '\0' && ERROR == parse_line(ram, start))
 		{

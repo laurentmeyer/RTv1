@@ -1,15 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   object.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/18 12:06:44 by jpriou            #+#    #+#             */
+/*   Updated: 2019/01/18 12:25:19 by jpriou           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef OBJECT_H
 # define OBJECT_H
 
 # include "geometry.h"
 # include "color.h"
-// # include "rtv1.h"
-/*
-# define SPHERE      0
-# define PLANE       1
-# define CYLINDER    2
-# define CONE        3
-*/
+
 # define DIRECTIONAL 0
 # define SPOT        1
 
@@ -49,7 +55,7 @@ typedef struct		s_light
 	double			intensity;
 }					t_light;
 
-t_object			*new_object(char * type);
+t_object			*new_object(char *type);
 void				destroy_object(t_object *obj);
 t_light				*new_light(int type);
 void				destroy_light(t_light *light);

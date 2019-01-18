@@ -1,11 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   object_cylinder.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/18 12:09:13 by jpriou            #+#    #+#             */
+/*   Updated: 2019/01/18 12:41:44 by jpriou           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rtv1.h"
 #include "raytracer.h"
 #include "geometry.h"
 #include <math.h>
 
-//http://hugi.scene.org/online/hugi24/coding%20graphics%20chris%20dragan%20raytracing%20shapes.htm
+/*
+**	http://hugi.scene.org/online/hugi24/
+**		coding%20graphics%20chris%20dragan%20raytracing%20shapes.htm
+*/
 
-static inline void		get_coefficients(t_v3 *out, t_ray *ray, t_object *cylinder)
+static inline void		get_coefficients(
+							t_v3 *out,
+							t_ray *ray,
+							t_object *cylinder)
 {
 	double	tmp;
 	t_v3	x;
@@ -23,7 +41,7 @@ static inline void		get_coefficients(t_v3 *out, t_ray *ray, t_object *cylinder)
 	out->z += dot_product(x, x) - cylinder->scale.x * cylinder->scale.x;
 }
 
-int			hit_cylinder(t_hit *out, t_ray *ray, t_object *cylinder)
+int						hit_cylinder(t_hit *out, t_ray *ray, t_object *cylinder)
 {
 	t_v3	abc;
 	double	t2;
@@ -41,12 +59,14 @@ int			hit_cylinder(t_hit *out, t_ray *ray, t_object *cylinder)
 	return (out->t > 0.);
 }
 
-void		normal_cylinder(t_hit *out)
+void					normal_cylinder(t_hit *out)
 {
 	double		m;
 
 	m = dot_product(out->ray.direction, out->object->direction) * out->t;
-	m += dot_product(sub_v3(out->ray.origin, out->object->position), out->object->direction);
+	m += dot_product(
+			sub_v3(out->ray.origin, out->object->position),
+			out->object->direction);
 	out->normal = sub_v3(out->point, out->object->position);
 	out->normal = sub_v3(out->normal, mul_v3(out->object->direction, m));
 	out->normal = normalize(out->normal);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lmeyer <lmeyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 15:47:56 by lmeyer            #+#    #+#             */
-/*   Updated: 2018/09/28 19:57:56 by lmeyer           ###   ########.fr       */
+/*   Updated: 2019/01/18 12:37:25 by jpriou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ char					**ft_argsplit(int *aac, char **av);
 int						ft_intlen(int n);
 void					ft_swap_int(int *a, int *b);
 double					ft_atof(char *s);
+double					ft_bound(double min, double max, double cand);
 size_t					ft_index(char **haystack, char *needle);
 
 #endif

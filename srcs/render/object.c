@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   object.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/18 12:09:42 by jpriou            #+#    #+#             */
+/*   Updated: 2019/01/18 12:16:56 by jpriou           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "object.h"
 #include "rtv1.h"
 #include "geometry.h"
@@ -6,8 +18,10 @@
 t_object	*new_object(char *type)
 {
 	static char		*dict[] = {"sphere", "plane", "cylinder", "cone", NULL};
-	static t_hit_f	hit[] = {&hit_sphere, &hit_plane, &hit_cylinder, &hit_cone, NULL};
-	static t_norm_f	norm[] = {&normal_sphere, &normal_plane, &normal_cylinder, &normal_cylinder, NULL};
+	static t_hit_f	hit[] = {&hit_sphere, &hit_plane, &hit_cylinder,
+								&hit_cone, NULL};
+	static t_norm_f	norm[] = {&normal_sphere, &normal_plane, &normal_cylinder,
+								&normal_cylinder, NULL};
 	int				index;
 	t_object		*obj;
 
@@ -24,7 +38,7 @@ t_object	*new_object(char *type)
 	return (obj);
 }
 
-t_light *new_light(int type)
+t_light		*new_light(int type)
 {
 	t_light *light;
 
@@ -37,12 +51,12 @@ t_light *new_light(int type)
 	return (light);
 }
 
-void destroy_light(t_light *light)
+void		destroy_light(t_light *light)
 {
 	free(light);
 }
 
-void destroy_object(t_object *obj)
+void		destroy_object(t_object *obj)
 {
 	free(obj);
 }

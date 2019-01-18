@@ -47,6 +47,7 @@ FILES_RENDER = \
 FILES_UTILS = \
 			color.c \
 			geometry.c \
+			geometry2.c \
 			math.c \
 			transformations.c \
 

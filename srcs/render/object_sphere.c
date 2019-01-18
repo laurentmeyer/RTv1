@@ -1,9 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   object_sphere.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/18 12:09:40 by jpriou            #+#    #+#             */
+/*   Updated: 2019/01/18 12:41:21 by jpriou           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rtv1.h"
 #include "raytracer.h"
 #include "geometry.h"
 #include <math.h>
 
-static inline void		get_coefficients(t_v3 *out, t_ray *ray, t_object *sphere)
+static inline void		get_coefficients(
+							t_v3 *out,
+							t_ray *ray,
+							t_object *sphere)
 {
 	t_v3	x;
 
@@ -15,7 +30,7 @@ static inline void		get_coefficients(t_v3 *out, t_ray *ray, t_object *sphere)
 	out->z += dot_product(x, x) - sphere->scale.x * sphere->scale.x;
 }
 
-int			hit_sphere(t_hit *out, t_ray *ray, t_object *sphere)
+int						hit_sphere(t_hit *out, t_ray *ray, t_object *sphere)
 {
 	t_v3	abc;
 	double	t2;
@@ -33,7 +48,9 @@ int			hit_sphere(t_hit *out, t_ray *ray, t_object *sphere)
 	return (out->t > 0.);
 }
 
-void				normal_sphere(t_hit *out)
+void					normal_sphere(t_hit *out)
 {
-	out->normal = mul_v3(sub_v3(out->point, out->object->position), 1. / out->object->scale.x);
+	out->normal = mul_v3(
+					sub_v3(out->point, out->object->position),
+					1. / out->object->scale.x);
 }

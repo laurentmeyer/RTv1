@@ -6,7 +6,7 @@
 #    By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/18 11:39:09 by jpriou            #+#    #+#              #
-#    Updated: 2019/01/18 12:00:19 by jpriou           ###   ########.fr        #
+#    Updated: 2019/01/18 12:04:12 by jpriou           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,4 +78,4 @@ re: fclean all
 
 .PHONY: norme
 norme:
-	norminette $(SOURCES) includes
+	@norminette $(SRC) $(HEADERDIR) $(LIBFT)

@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/18 12:06:51 by jpriou            #+#    #+#             */
+/*   Updated: 2019/01/18 12:42:26 by jpriou           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PARSING_H
 # define PARSING_H
 
 # include "geometry.h"
 # include "scene.h"
+
 # define I_LIGHT  0
 # define I_OBJECT 1
 # define I_CAMERA 2
-
 
 typedef struct		s_i_object
 {

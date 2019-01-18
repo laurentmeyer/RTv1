@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_scene.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/18 12:05:05 by jpriou            #+#    #+#             */
+/*   Updated: 2019/01/18 12:11:38 by jpriou           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "scene.h"
 #include "rtv1.h"
 #include "ft_math.h"
@@ -7,8 +19,8 @@
 static void		update_camera(t_camera *cam)
 {
 	cam->up_left.x = cam->eye_distance * tan(-cam->h_fov / 2);
-	cam->up_left.y = - cam->up_left.x * WIN_H / WIN_W;
-	cam->up_left.z =  - cam->eye_distance;
+	cam->up_left.y = -cam->up_left.x * WIN_H / WIN_W;
+	cam->up_left.z = -cam->eye_distance;
 	cam->pixel_steps.x = -2. * cam->up_left.x / WIN_W;
 	cam->pixel_steps.y = -2. * cam->up_left.y / WIN_H;
 }
@@ -24,7 +36,7 @@ void			init_scene(t_ram *ram)
 	update_camera(&ram->scene->camera);
 }
 
-void 			free_scene(t_scene *scene)
+void			free_scene(t_scene *scene)
 {
 	size_t	i;
 
