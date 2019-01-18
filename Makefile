@@ -1,82 +1,81 @@
-CC = 		gcc
-CFLAGS =	-g -Wall -Wextra -Werror
-BINARY =	rtv1
-BUILDDIR =	builds
-SOURCEDIR =	srcs
-HEADERDIR = includes
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/01/18 11:39:09 by jpriou            #+#    #+#              #
+#    Updated: 2019/01/18 12:00:19 by jpriou           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-SRCFILES =						\
-			display.c			\
-			exit.c				\
-			init_display.c		\
-			init_scene.c		\
-			init_ram.c			\
-			init_parsing.c		\
-			hooks.c				\
-			main.c				\
-			math.c				\
-			parsing.c			\
-			parse_object.c		\
-			parse_light.c		\
-			parse_camera.c		\
-			color.c				\
-			object.c			\
-			object_cone.c		\
-			object_sphere.c		\
-			object_cylinder.c	\
-			object_plane.c		\
-			transformations.c	\
-			geometry.c			\
-			shading.c			\
-			render.c		
+_RED=$(shell tput setaf 1 2> /dev/null || echo "")
+_GREEN=$(shell tput setaf 2 2> /dev/null || echo "")
+_YELLOW=$(shell tput setaf 3 2> /dev/null || echo "")
+_BLUE=$(shell tput setaf 4 2> /dev/null || echo "")
+_PURPLE=$(shell tput setaf 5 2> /dev/null || echo "")
+_CYAN=$(shell tput setaf 6 2> /dev/null || echo "")
+_WHITE=$(shell tput setaf 7 2> /dev/null || echo "")
+_END=$(shell tput sgr0 2> /dev/null || echo "")
 
-LIBS =		ft						\
-			mlx
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+NAME = rtv1
+BUILDDIR = builds/
+SOURCEDIR = srcs/
+HEADERDIR = includes/
+
+SRCFILES = ""
+
+include files.mk
+
+LIBS = \
+		ft \
+		mlx \
 
 LIBFT = 		./libft/
 
 MINILIB = 		./mlx/
 
-CCHEADERS = -I./$(HEADERDIR)				\
-			-I$(LIBFT)/libft/includes		\
-			-I$(LIBFT)/ft_printf/includes	\
+CCHEADERS = -I./$(HEADERDIR) \
+			-I$(LIBFT)/libft/includes \
+			-I$(LIBFT)/ft_printf/includes \
 			-I$(MINILIB)
 
-CCLIBS = -L$(LIBFT) -lft			\
+CCLIBS = -L$(LIBFT) -lft \
 		 -L$(MINILIB) -lmlx
 
 CCFRAMEWORKS = -framework AppKit -framework OpenGL
 
-SOURCES = $(SRCFILES:%.c=$(SOURCEDIR)/%.c)
-OBJECTS = $(SOURCES:$(SOURCEDIR)/%.c=$(BUILDDIR)/%.o)
+OBJ = $(SRC:%.c=%.o)
 
-.PHONY: clean fclean all re norme newline $(LIBFT)/libft.a
+.PHONY: all
+all : $(NAME)
 
-all : $(BINARY)
-
-newline:
-		@echo "\033[38;5;166m\033[0m\n"
-
-$(BINARY) : $(OBJECTS)
+$(NAME) : $(OBJ)
 	make -C $(LIBFT)
 	make -C $(MINILIB)
-	@$(CC) $(CCHEADERS) $(CCLIBS) $(OBJECTS) $(CCFRAMEWORKS) -o $(BINARY)
+	@$(CC) $(CCHEADERS) $(CCLIBS) $(OBJ) $(CCFRAMEWORKS) -o $(NAME)
 
-$(BUILDDIR)/%.o : $(SOURCEDIR)/%.c
-	echo "\033[1A\033[K\033[38;5;226mmaking $@\033[0m"
-	mkdir -p $(@D)
-	$(CC) $(CFLAGS) $(CCHEADERS) -c $< -o $@
+%.o : %.c
+	@printf "%smaking $@%s\\n" "$(_YELLOW)" "$(_END)"
+	@$(CC) $(CFLAGS) $(CCHEADERS) -c $< -o $@
 
+.PHONY: clean
 clean:
 	$(MAKE) -C $(LIBFT) clean
 	$(MAKE) -C $(MINILIB) clean
-	rm -f $(OBJECTS)
+	rm -f $(OBJ)
 
+.PHONY: fclean
 fclean: clean
 	$(MAKE) -C $(LIBFT) fclean
-	rm -f $(BINARY)
+	rm -f $(NAME)
 
+.PHONY: re
 re: fclean all
 
-norme: newline
-		norminette $(SOURCES) includes
+.PHONY: norme
+norme:
+	norminette $(SOURCES) includes
