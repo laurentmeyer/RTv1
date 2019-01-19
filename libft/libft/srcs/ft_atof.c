@@ -12,11 +12,26 @@
 
 #include "libft.h"
 
-double		ft_atof(char const *s)
+static inline double decimal_part(char const *s)
+{
+	char	buf[9];
+	int		l;
+	unsigned int	pow;
+
+	if (!s || 0 == *s)
+		return (0.);
+	ft_strncpy(buf, s, 8);
+	pow = 1;
+	l = strlen(buf);
+	while (l-- > 0)
+		pow *= 10;
+	return ((double)ft_atoi(buf) / pow);
+}
+
+double ft_atof(char const *s)
 {
 	int integer;
-	int decimal;
-	int after_point;
+	double decimal;
 	int negative;
 
 	while (*s == ' ' || *s == '\t')
@@ -25,13 +40,10 @@ double		ft_atof(char const *s)
 	integer = ft_atoi(s);
 	while (*s != 0 && *s != '.')
 		++s;
-	decimal = ('.' == *s) ? ft_atoi(s + 1) : 0;
-	if (0 == decimal)
+	if ('.' != *s)
 		return ((double)integer);
-	after_point = 1;
-	while (after_point <= decimal)
-		after_point *= 10;
+	decimal = decimal_part(s + 1);
 	if (integer < 0 || negative)
-		return ((double)integer - (double)decimal / after_point);
-	return ((double)integer + (double)decimal / after_point);
+		return ((double)integer - decimal);
+	return ((double)integer + decimal);
 }

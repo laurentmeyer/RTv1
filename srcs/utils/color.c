@@ -12,6 +12,15 @@
 
 #include "color.h"
 
+static unsigned int	bound_char(double d)
+{
+	unsigned int	i;
+
+	i = (unsigned int)(0xFF * d);
+	return (i > 0xFF ? 0xFF : i);
+}
+
+
 void		color_of_int(t_color *out, unsigned int *in)
 {
 	out->x = (float)((*in & 0xFF0000) >> 16) / 0xFF;
@@ -21,9 +30,9 @@ void		color_of_int(t_color *out, unsigned int *in)
 
 void		int_of_color(unsigned int *out, t_color *in)
 {
-	*out = (int)(0xFF * in->x) << 16 |
-			(int)(0xFF * in->y) << 8 |
-			(int)(0xFF * in->z);
+	*out = bound_char(in->x) << 16 |
+			bound_char(in->y) << 8 |
+			bound_char(in->z);
 }
 
 t_color		add_color(t_color a, t_color b)
