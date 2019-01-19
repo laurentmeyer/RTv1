@@ -13,3 +13,11 @@ position	0	0	-5
 diffuse		.8
 specular	.9
 phong		1000
+
+#######################
+###      plane      ###
+#######################
+object		plane
+color		0.	1	0.5
+position	0.	-.99	0.
+rotation	0.	0.	.0

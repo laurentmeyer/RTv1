@@ -2,21 +2,21 @@
 ###     camera      ###
 #######################
 camera
-position	0.	3	10.
-rotation	-10	10	0.
+#position	0.	3	10.
+#rotation	-10	10	0.
 
 #######################
 ###   spot light    ###
 #######################
 light 		spot
-position	3.	2.	3.
+position	0.	1	1.
 intensity	1.
 	
 #######################
 ## directional light ##
 #######################
 light 		directional
-direction	-1.	-2.	-10.
+direction	-1.	2.	-10.
 intensity	.7
 
 #######################
@@ -28,7 +28,7 @@ diffuse		.3
 specular	.9
 phong		100
 scale		1.	0.5	1.
-#position	0. 0.  -2.
+position	0. 0.  -10.
 rotation	30. 45.	0.
 
 #######################
@@ -36,7 +36,7 @@ rotation	30. 45.	0.
 #######################
 object		plane
 color		0.9	.5	0.5
-position	0.	-1.	0.
+position	0.	-1	0.
 rotation	0.	0.	.0
 
 #######################

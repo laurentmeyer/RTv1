@@ -12,22 +12,22 @@
 
 #include "libft.h"
 
-double		ft_atof(char *s)
+double ft_atof(char const *s)
 {
-	int				integer;
-	int				decimal;
-	int				after_point;
+  int integer;
+  int decimal;
+  int after_point;
+  int negative;
 
-	integer = ft_atoi(s);
-	while (*s != 0 && *s != '.')
-		++s;
-	decimal = ('.' == *s) ? ft_atoi(s + 1) : 0;
-	if (0 == decimal)
-		return ((double)integer);
-	after_point = 1;
-	while (after_point <= decimal)
-		after_point *= 10;
-	if (integer < 0)
-		return ((double)integer - (double)decimal / after_point);
-	return ((double)integer + (double)decimal / after_point);
+  while (*s == ' ' || *s == '\t') ++s;
+  negative = (*s == '-');
+  integer = ft_atoi(s);
+  while (*s != 0 && *s != '.') ++s;
+  decimal = ('.' == *s) ? ft_atoi(s + 1) : 0;
+  if (0 == decimal) return ((double)integer);
+  after_point = 1;
+  while (after_point <= decimal) after_point *= 10;
+  if (integer < 0 || negative)
+    return ((double)integer - (double)decimal / after_point);
+  return ((double)integer + (double)decimal / after_point);
 }
