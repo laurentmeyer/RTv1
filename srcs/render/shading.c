@@ -6,7 +6,7 @@
 /*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 12:09:47 by jpriou            #+#    #+#             */
-/*   Updated: 2019/01/18 12:43:35 by jpriou           ###   ########.fr       */
+/*   Updated: 2019/01/19 12:08:46 by jpriou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ t_color		shade_one_light(t_ram *ram, t_hit *hit, t_ray *ray, t_light *light)
 	if (specular <= 0.)
 		return (color);
 	else
-		specular = pow(specular,
-			hit->object->material.phong_exponent) *
+		specular = pow(specular, hit->object->material.phong_exponent) *
 			hit->object->material.specular;
 	return (add_color(color,
 					mul_v3((t_color){1., 1., 1.}, intensity * specular)));
@@ -70,7 +69,6 @@ void		shade_pixel(t_ram *ram, t_hit *hit, t_ray *ray, t_color *out)
 	size_t i;
 
 	*out = (t_v3){0., 0., 0.};
-	// *out = mul_v3(hit->object->material.color, ram->scene->ambiant_light);
 	i = 0;
 	while (i < ram->scene->lights_count)
 		*out = add_color(*out,

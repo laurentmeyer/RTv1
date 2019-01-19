@@ -6,7 +6,7 @@
 /*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 12:09:38 by jpriou            #+#    #+#             */
-/*   Updated: 2019/01/18 12:09:38 by jpriou           ###   ########.fr       */
+/*   Updated: 2019/01/19 12:05:57 by jpriou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ int		hit_plane(t_hit *out, t_ray *ray, t_object *plane)
 
 void	normal_plane(t_hit *out)
 {
-	// if (dot_product(out->normal, out->ray.direction) < 0)
-	// 	out->normal = inverse(out->normal);
 	(void)out;
 	return ;
 }
