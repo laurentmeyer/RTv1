@@ -6,7 +6,7 @@
 /*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 12:09:47 by jpriou            #+#    #+#             */
-/*   Updated: 2019/01/18 12:43:35 by jpriou           ###   ########.fr       */
+/*   Updated: 2019/01/19 13:04:29 by jpriou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,9 @@ void		point_to_light(
 	{
 		vec = sub_v3(light->position, *point);
 		out->ray.direction = normalize(vec);
-        out->ray.max_length =
-                    magnitude(sub_v3(*point, light->position));
+		out->ray.max_length = magnitude(sub_v3(*point, light->position));
 		*intensity = *intensity / pow(magnitude(vec), 0.4);
-        }
+	}
 }
 
 t_color		shade_one_light(t_ram *ram, t_hit *hit, t_ray *ray, t_light *light)

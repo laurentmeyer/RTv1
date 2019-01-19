@@ -1,0 +1,79 @@
+
+## camera
+camera
+position 0 0 20
+
+## lights
+light 		directional
+direction	-1. -1.	-1.
+intensity	1.
+
+light 		spot
+position	0.	20.	20.
+
+## spheres
+#1
+object		sphere
+color		1.	0.	0.
+position	-3	3	0
+diffuse		.8
+specular	.9
+phong		1000
+
+object		sphere
+color		0.	1.	0.
+position	0	3	0
+diffuse		.8
+specular	.9
+phong		1000
+
+object		sphere
+color		0.	0.	1.
+position	3	3	0
+diffuse		.8
+specular	.9
+phong		1000
+
+#2
+object		sphere
+color		1.	0.	0.
+position	-3	0	0
+diffuse		.5
+specular	.9
+phong		1000
+
+object		sphere
+color		0.	1.	0.
+position	0	0	0
+diffuse		.5
+specular	.9
+phong		1000
+
+object		sphere
+color		0.	0.	1.
+position	3	0	0
+diffuse		.5
+specular	.9
+phong		1000
+
+#3
+object		sphere
+color		1.	0.	0.
+position	-3	-3	0
+diffuse		.2
+specular	.9
+phong		1000
+
+object		sphere
+color		0.	1.	0.
+position	0	-3	0
+diffuse		.2
+specular	.9
+phong		1000
+
+object		sphere
+color		0.	0.	1.
+position	3	-3	0
+diffuse		.2
+specular	.9
+phong		1000

@@ -6,6 +6,13 @@ position	0.	3	100.
 #rotation	-10	10	0.
 
 #######################
+## directional light ##
+#######################
+light 		directional
+direction	0.	10.	-1.
+intensity	1.
+
+#######################
 ###   spot light    ###
 #######################
 light 		spot

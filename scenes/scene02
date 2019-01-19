@@ -5,6 +5,13 @@ light 		spot
 position	0.	3.	0.
 
 #######################
+## directional light ##
+#######################
+light 		directional
+direction	-100.	0.	0.
+intensity	.5
+
+#######################
 ###      sphere     ###
 #######################
 object		sphere

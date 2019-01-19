@@ -6,7 +6,7 @@
 /*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 12:07:02 by jpriou            #+#    #+#             */
-/*   Updated: 2019/01/18 12:07:02 by jpriou           ###   ########.fr       */
+/*   Updated: 2019/01/19 13:11:47 by jpriou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "object.h"
 # include <stdlib.h>
-# define MAX_OBJECTS 12
+# define MAX_OBJECTS 250
 # define MAX_LIGHTS 2
 
 typedef struct		s_scene
