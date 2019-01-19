@@ -6,7 +6,7 @@
 /*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 12:30:40 by jpriou            #+#    #+#             */
-/*   Updated: 2019/01/19 14:58:25 by jpriou           ###   ########.fr       */
+/*   Updated: 2019/01/19 15:10:19 by jpriou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static inline double		decimal_part(char const *s)
 		return (0.);
 	ft_strncpy(buf, s, 8);
 	pow = 1;
-	l = strlen(buf);
+	l = ft_strlen(buf);
 	while (l-- > 0)
 		pow *= 10;
 	return ((double)ft_atoi(buf) / pow);
