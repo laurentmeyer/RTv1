@@ -6,7 +6,7 @@
 /*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 12:09:47 by jpriou            #+#    #+#             */
-/*   Updated: 2019/01/19 13:04:29 by jpriou           ###   ########.fr       */
+/*   Updated: 2019/01/19 14:49:19 by jpriou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <float.h>
 
 void		point_to_light(
-				t_hit	*out,
+				t_hit *out,
 				double *intensity,
 				t_light *light,
 				t_v3 *point)
