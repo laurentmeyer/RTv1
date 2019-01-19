@@ -6,7 +6,7 @@
 /*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 12:07:13 by jpriou            #+#    #+#             */
-/*   Updated: 2019/01/18 12:11:52 by jpriou           ###   ########.fr       */
+/*   Updated: 2019/01/19 15:07:44 by jpriou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int		parse_args(t_ram *ram)
 	if ((c = count_args(args)) == 4)
 	{
 		vec = (t_v3){ft_atof(args[1]), ft_atof(args[2]), ft_atof(args[3])};
-		if (0 == strcmp(args[0], "position"))
+		if (0 == ft_strcmp(args[0], "position"))
 			camera->position = vec;
-		else if (0 == strcmp(args[0], "rotation"))
+		else if (0 == ft_strcmp(args[0], "rotation"))
 			camera->rotation = vec;
 		else
 			return (ERROR);

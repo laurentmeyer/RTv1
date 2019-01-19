@@ -6,7 +6,7 @@
 /*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 12:07:18 by jpriou            #+#    #+#             */
-/*   Updated: 2019/01/18 12:38:29 by jpriou           ###   ########.fr       */
+/*   Updated: 2019/01/19 15:07:50 by jpriou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ static int		parse_args(char **args, t_light *light)
 	if ((c = count_args(args)) == 4)
 	{
 		vec = (t_v3){ft_atof(args[1]), ft_atof(args[2]), ft_atof(args[3])};
-		if (0 == strcmp(args[0], "position"))
+		if (0 == ft_strcmp(args[0], "position"))
 			light->position = vec;
-		else if (0 == strcmp(args[0], "direction"))
+		else if (0 == ft_strcmp(args[0], "direction"))
 			light->direction = normalize(vec);
 		else
 			return (ERROR);
@@ -44,7 +44,7 @@ static int		parse_args(char **args, t_light *light)
 	else if (c == 2)
 	{
 		d = ft_atof(args[1]);
-		if (0 == strcmp(args[0], "intensity"))
+		if (0 == ft_strcmp(args[0], "intensity"))
 			light->intensity = ft_bound(0., 1., d);
 		else
 			return (ERROR);

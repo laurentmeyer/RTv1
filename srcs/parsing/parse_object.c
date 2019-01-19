@@ -6,7 +6,7 @@
 /*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 12:07:22 by jpriou            #+#    #+#             */
-/*   Updated: 2019/01/18 12:54:57 by jpriou           ###   ########.fr       */
+/*   Updated: 2019/01/19 15:07:56 by jpriou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ static t_object		*push_object(t_ram *ram, t_object *object)
 
 static int			parse4_args(char *args0, t_object *object, t_v3 vec)
 {
-	if (0 == strcmp(args0, "position"))
+	if (0 == ft_strcmp(args0, "position"))
 		object->position = vec;
-	else if (0 == strcmp(args0, "scale"))
+	else if (0 == ft_strcmp(args0, "scale"))
 		object->scale = vec;
-	else if (0 == strcmp(args0, "color"))
+	else if (0 == ft_strcmp(args0, "color"))
 		object->material.color = vec;
-	else if (0 == strcmp(args0, "rotation"))
+	else if (0 == ft_strcmp(args0, "rotation"))
 	{
 		object->direction = (t_v3){0., 1., 0.};
 		object->direction = rotate_x(object->direction, radians(vec.x));
@@ -50,11 +50,11 @@ static int			parse4_args(char *args0, t_object *object, t_v3 vec)
 
 static int			parse2_args(char *args0, t_object *object, double d)
 {
-	if (0 == strcmp(args0, "diffuse"))
+	if (0 == ft_strcmp(args0, "diffuse"))
 		object->material.diffuse = d;
-	else if (0 == strcmp(args0, "specular"))
+	else if (0 == ft_strcmp(args0, "specular"))
 		object->material.specular = d;
-	else if (0 == strcmp(args0, "phong"))
+	else if (0 == ft_strcmp(args0, "phong"))
 		object->material.phong_exponent = d;
 	else
 		return (0);
