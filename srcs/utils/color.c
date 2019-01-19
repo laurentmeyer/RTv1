@@ -6,13 +6,13 @@
 /*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 12:09:53 by jpriou            #+#    #+#             */
-/*   Updated: 2019/01/18 12:21:22 by jpriou           ###   ########.fr       */
+/*   Updated: 2019/01/19 14:57:27 by jpriou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "color.h"
 
-static unsigned int	bound_char(double d)
+static unsigned int		bound_char(double d)
 {
 	unsigned int	i;
 
@@ -20,22 +20,21 @@ static unsigned int	bound_char(double d)
 	return (i > 0xFF ? 0xFF : i);
 }
 
-
-void		color_of_int(t_color *out, unsigned int *in)
+void					color_of_int(t_color *out, unsigned int *in)
 {
 	out->x = (float)((*in & 0xFF0000) >> 16) / 0xFF;
 	out->y = (float)((*in & 0xFF00) >> 8) / 0xFF;
 	out->z = (float)(*in & 0xFF) / 0xFF;
 }
 
-void		int_of_color(unsigned int *out, t_color *in)
+void					int_of_color(unsigned int *out, t_color *in)
 {
 	*out = bound_char(in->x) << 16 |
 			bound_char(in->y) << 8 |
 			bound_char(in->z);
 }
 
-t_color		add_color(t_color a, t_color b)
+t_color					add_color(t_color a, t_color b)
 {
 	t_color	c;
 

@@ -6,16 +6,16 @@
 /*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 12:30:40 by jpriou            #+#    #+#             */
-/*   Updated: 2019/01/19 12:08:24 by jpriou           ###   ########.fr       */
+/*   Updated: 2019/01/19 14:58:25 by jpriou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static inline double decimal_part(char const *s)
+static inline double		decimal_part(char const *s)
 {
-	char	buf[9];
-	int		l;
+	char			buf[9];
+	int				l;
 	unsigned int	pow;
 
 	if (!s || 0 == *s)
@@ -28,11 +28,11 @@ static inline double decimal_part(char const *s)
 	return ((double)ft_atoi(buf) / pow);
 }
 
-double ft_atof(char const *s)
+double						ft_atof(char const *s)
 {
-	int integer;
-	double decimal;
-	int negative;
+	int		integer;
+	double	decimal;
+	int		negative;
 
 	while (*s == ' ' || *s == '\t')
 		++s;
