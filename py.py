@@ -20,4 +20,4 @@ for i in range(-RANGEX, RANGEX + 1, 2):
         r = rule3 (float(i), -RANGEX, RANGEX, 0., 1.)
         g = rule3 (float(j), -RANGEY, RANGEY, 0., 1.)
         # print(r, g)
-        printSphere(r, g, 0., i, j)
+        printSphere(g, 0.5, r, i, j)
