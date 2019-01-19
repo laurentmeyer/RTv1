@@ -36,43 +36,29 @@ void			screen_to_world(t_ram *ram, t_ray *ray, int x, int y)
 	ray->direction = normalize(ray->direction);
 }
 
-int				intersection(t_scene *scene, t_ray *const ray, double epsilon)
-{
-	size_t			i;
-	t_hit			tmp;
-	t_hit_f			fun;
-
-	i = 0;
-	while (i < scene->objects_count)
-	{
-		fun = (t_hit_f)(scene->objects[i]->hit_f);
-		if ((*fun)(&tmp, ray, scene->objects[i]) && tmp.t > epsilon)
-			return (TRUE);
-		++i;
-	}
-	return (FALSE);
-}
-
 int				closest_intersection(
 					t_scene *scene,
 					t_ray *const ray,
 					t_hit *dst)
 {
 	size_t			i;
-	double			min_dist;
 	t_hit			tmp;
 	t_hit_f			fun;
 	int				found;
+	double			max_dist;
 
-	min_dist = DBL_MAX;
+	max_dist = ray->max_length;
 	i = 0;
 	found = FALSE;
 	while (i < scene->objects_count)
 	{
 		fun = (t_hit_f)(scene->objects[i]->hit_f);
-		if ((*fun)(&tmp, ray, scene->objects[i]) && tmp.t < min_dist)
+		if ((*fun)(&tmp, ray, scene->objects[i]) && tmp.t < max_dist
+				&& tmp.t > EPSILON)
 		{
-			min_dist = tmp.t;
+			max_dist = tmp.t;
+			if (NULL == dst)
+				return (TRUE);
 			*dst = tmp;
 			dst->object = scene->objects[i];
 			found = TRUE;
@@ -90,6 +76,7 @@ void			render_pixel(unsigned int *out, t_ram *ram, int x, int y)
 	t_norm_f	fun;
 
 	screen_to_world(ram, &ray, x, y);
+	ray.max_length = DBL_MAX;
 	color = (t_color){0., 0., 0.};
 	if (closest_intersection(ram->scene, &ray, &hit))
 	{

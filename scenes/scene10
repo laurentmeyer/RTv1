@@ -1,0 +1,71 @@
+#######################
+###     camera      ###
+#######################
+camera
+position	0.	3	10.
+#rotation	-10	10	0.
+
+#######################
+###   spot light    ###
+#######################
+light 		spot
+position	3.	2.	3.
+intensity	1.
+	
+########################
+### directional light ##
+########################
+#light 		directional
+#direction	-1.	-2.	-10.
+#intensity	.7
+
+#######################
+###      cone       ###
+#######################
+object		cone
+color		1.	0.5	1.
+diffuse		.3
+specular	.9
+phong		100
+scale		1.	0.5	1.
+#position	0. 0.  -2.
+rotation	30. 45.	0.
+
+#######################
+###      sphere     ###
+#######################
+object		sphere
+color		1.	0.	0.
+diffuse		.8
+specular	.5
+phong		100
+position	-2.5 5 -10
+
+#######################
+###      sphere     ###
+#######################
+object		sphere
+color		1.	0.	0.
+diffuse		.8
+specular	.5
+phong		100
+scale		30.	30 30
+position	-2.5 1.5 -50
+
+#######################
+###      sphere     ###
+#######################
+object		sphere
+color		1.	0.	0.
+diffuse		.8
+specular	.5
+phong		100
+position	-2.5 1.5 0
+
+#######################
+###      plane      ###
+#######################
+object		plane
+color		0.9	.5	0.5
+position	0.	3.	0.
+rotation	0.	0.	.0

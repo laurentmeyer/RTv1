@@ -27,6 +27,7 @@
 # define SUCCESS 0
 # define FALSE 0
 # define TRUE !FALSE
+# define EPSILON 0.0001f
 
 typedef struct		s_ram
 {
@@ -54,10 +55,6 @@ int					init_hooks(t_ram *ram);
 void				pixel_put(t_image *img, int x, int y, unsigned int color);
 int					render_scene(t_ram *ram);
 void				exit_message(t_ram *ram, int exit_code, char *message);
-int					intersection(
-						t_scene *scene,
-						t_ray *const ray,
-						double epsilon);
 int					closest_intersection(
 						t_scene *scene,
 						t_ray *const ray,

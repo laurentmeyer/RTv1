@@ -20,6 +20,7 @@ typedef struct		s_ray
 {
 	t_v3			origin;
 	t_v3			direction;
+	double			max_length;
 }					t_ray;
 
 typedef struct		s_hit

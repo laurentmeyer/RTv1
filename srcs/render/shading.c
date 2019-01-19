@@ -16,14 +16,6 @@
 #include "color.h"
 #include <math.h>
 
-t_color		normal_color(t_v3 *normal)
-{
-	return ((t_color)
-				{(normal->x + 1.) / 2.,
-					(normal->y + 1.) / 2.,
-					(normal->z + 1.) / 2.});
-}
-
 void		point_to_light(
 				t_v3 *direction,
 				double *intensity,
@@ -53,8 +45,9 @@ t_color		shade_one_light(t_ram *ram, t_hit *hit, t_ray *ray, t_light *light)
 
 	point_to_light(&(l.direction), &intensity, light, &(hit->point));
 	l.origin = hit->point;
+	l.max_length = magnitude(sub_v3(hit->point, light->position));
 	color = (t_color){0., 0., 0.};
-	if (intersection(ram->scene, &l, 1e-7))
+	if (closest_intersection(ram->scene, &l, NULL))
 		return (color);
 	diffuse = dot_product(l.direction, hit->normal);
 	if (diffuse > 0.)
@@ -63,7 +56,7 @@ t_color		shade_one_light(t_ram *ram, t_hit *hit, t_ray *ray, t_light *light)
 	specular = dot_product(hit->normal,
 					normalize(add_v3(inverse(ray->direction), l.direction)));
 	if (specular <= 0.)
-		specular = 0.;
+		return (color);
 	else
 		specular = pow(specular,
 			hit->object->material.phong_exponent) *
@@ -76,7 +69,8 @@ void		shade_pixel(t_ram *ram, t_hit *hit, t_ray *ray, t_color *out)
 {
 	size_t i;
 
-	*out = mul_v3(hit->object->material.color, ram->scene->ambiant_light);
+	*out = (t_v3){0., 0., 0.};
+	// *out = mul_v3(hit->object->material.color, ram->scene->ambiant_light);
 	i = 0;
 	while (i < ram->scene->lights_count)
 		*out = add_color(*out,

@@ -17,23 +17,24 @@
 
 int		hit_plane(t_hit *out, t_ray *ray, t_object *plane)
 {
-	t_v3	diff;
+	double	denom;
 
 	out->normal = (t_v3){0., 1., 0.};
 	out->normal = rotate_x(out->normal, plane->direction.x);
 	out->normal = rotate_y(out->normal, plane->direction.y);
 	out->normal = rotate_z(out->normal, plane->direction.z);
-	diff = (t_v3){plane->position.x - ray->origin.x,
-		plane->position.y - ray->origin.y, plane->position.z - ray->origin.z};
-	out->t = dot_product(out->normal, ray->direction);
-	if (out->t == 0.)
+	denom = dot_product(out->normal, ray->direction);
+	if (fabs(denom) < 0.0001)
 		return (FALSE);
-	out->t = dot_product(out->normal, diff) / out->t;
-	return (out->t > 0);
+	out->t = dot_product(out->normal,
+		sub_v3(plane->position, ray->origin)) / denom;
+	return (out->t > 0.0001);
 }
 
 void	normal_plane(t_hit *out)
 {
+	// if (dot_product(out->normal, out->ray.direction) < 0)
+	// 	out->normal = inverse(out->normal);
 	(void)out;
 	return ;
 }
