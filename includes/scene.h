@@ -16,7 +16,7 @@
 # include "object.h"
 # include <stdlib.h>
 # define MAX_OBJECTS 250
-# define MAX_LIGHTS 2
+# define MAX_LIGHTS 5
 
 typedef struct		s_scene
 {

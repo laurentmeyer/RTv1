@@ -9,8 +9,15 @@ rotation	-10	10	0.
 ###   spot light    ###
 #######################
 light 		spot
-position	3.	2.	3.
+position	0.	3.	0.
 intensity	1.
+
+#######################
+###   spot light    ###
+#######################
+light 		spot
+position	3.	2.	3.
+intensity	6.
 	
 #######################
 ## directional light ##
@@ -24,35 +31,46 @@ intensity	.7
 #######################
 object		cone
 color		1.	0.5	1.
-diffuse		.3
+diffuse		.4
 specular	.9
-phong		100
+phong		1000
 scale		1.	0.5	1.
-#position	0. 0.  -2.
-rotation	30. 45.	0.
+position	-2. -1  -7
+rotation	30. 60.	-10.
 
-########################
-####    cylinder     ###
-########################
-#object		cylinder
-#color		0.	0.5	.5
-#diffuse		.3
-#specular	.9
-#phong		10
-#position	0. 0.  -2.
-#rotation	0. 90.	45.
+#######################
+###    cylinder     ###
+#######################
+object		cylinder
+color		.9	0.9	.0
+diffuse		.7
+specular	.9
+phong		1000
+position	-2. 0.  -2.
+rotation	0. 90.	45.
 
 #######################
 ###      sphere     ###
 #######################
 object		sphere
-color		0.	1.	0.
+color		0.2	0.8	0.2
 diffuse		.3
 specular	.9
 phong		1000
 scale		.5	.5	.5
 position	0.7	0.7	2.
 #position	.7	0.4	-2.
+
+#######################
+###      sphere     ###
+#######################
+object		sphere
+color		0.	0.1	1.
+diffuse		.9
+specular	.5
+phong		1000
+scale		2 	2 	2
+position	-2.5 -.3 -30
 
 #######################
 ###      sphere     ###
